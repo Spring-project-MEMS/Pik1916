@@ -35,14 +35,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger*/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/users").hasAnyRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/users").hasAnyRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/api/users/.*").authenticated()
-                .antMatchers(HttpMethod.PUT, "/api/users/.*").authenticated()
-                .antMatchers(HttpMethod.DELETE, "/api/users/.*").authenticated()
-                .antMatchers(HttpMethod.GET, "/api/posts").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/posts").authenticated()
-                .antMatchers(HttpMethod.GET, "/api/posts/.*").authenticated()
-                .antMatchers(HttpMethod.PUT, "/api/posts/.*").authenticated()
-                .antMatchers(HttpMethod.DELETE, "/api/posts/.*").authenticated()
+                .antMatchers(HttpMethod.PUT, "/api/**").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/api/**").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/posts/**").authenticated()
                 .and()
                 .formLogin()
                 .permitAll()
@@ -67,3 +63,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
+
