@@ -1,0 +1,76 @@
+<div th:fragment="menu(path)" xmlns:th="http://www.thymeleaf.org">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="/img/blog-logo.jpg" alt="Blog logo" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" th:class="${path == 'users'}? 'nav-item active' : 'nav-item'">
+                    <a class="nav-link" href="/users">View Users</a>
+                </li>
+                <li class="nav-item" th:class="${path == 'registration'}? 'nav-item active' : 'nav-item'">
+                    <a class="nav-link" href="/users/registration">Add User</a>
+                </li>
+                <li class="nav-item" th:class="${path == 'posts'}? 'nav-item active' : 'nav-item'">
+                    <a class="nav-link" href="/posts">Posts</a>
+                </li>
+                <li class="nav-item" th:class="${path == 'lastposts'}? 'nav-item active' : 'nav-item'">
+                    <a class="nav-link" href="/posts/lastposts">Last Posts</a>
+                </li>
+                <li class="nav-item" th:class="${path == 'post-form'}? 'nav-item active' : 'nav-item'">
+                    <a class="nav-link" href="/posts/post-form">Add Post</a>
+                </li>
+<!--                <li class="nav-item dropdown">-->
+<!--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                        Dropdown-->
+<!--                    </a>-->
+<!--                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--                        <a class="dropdown-item" href="#">Action</a>-->
+<!--                        <a class="dropdown-item" href="#">Another action</a>-->
+<!--                        <div class="dropdown-divider"></div>-->
+<!--                        <a class="dropdown-item" href="#">Something else here</a>-->
+<!--                    </div>-->
+<!--                </li>-->
+            </ul>
+
+            <form class="language-form form-inline my-2 my-lg-0">
+                <div class="form-group language-selector">
+                    <label for="locales" class="menu-label col-form-label">Language</label>
+                    <select id="locales" class="form-control">
+                        <option value="en-US" th:selected="${#locale.toLanguageTag() == 'en-US'}">EN</option>
+                        <option value="bg-BG" th:selected="${#locale.toLanguageTag() == 'bg-BG'}">BG</option>
+                    </select>
+                </div>
+            </form>
+
+<!--            <div sec:authorize="isAnonymous()">-->
+<!--                <a class="nav-item" th:href="@{/login}" th:text="#{lbl.login}"></a>-->
+<!--                <a class="nav-item" th:href="@{/register}" th:text="#{lbl.register}"></a>-->
+<!--            </div>-->
+
+<!--            <div sec:authorize="isAuthenticated()">-->
+<!--                <span class="nav-item" th:text ="${#authentication.getPrincipal().getUsername()}"></span>-->
+<!--                <a class="nav-item" th:href="@{/logout}" th:text="#{lbl.logout}"></a>-->
+<!--            </div>-->
+
+            <ul class="navbar-nav">
+                <li class="nav-item" sec:authorize="isAnonymous()">
+                    <a class="nav-link" th:href="@{/login}" th:text="#{lbl.login}"></a>
+                </li>
+                <li class="nav-item" sec:authorize="isAnonymous()">
+                    <a class="nav-link" th:href="@{/users/registration}" th:text="#{lbl.register}"></a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <span class="nav-link" th:text ="${#authentication.getPrincipal().getUsername()}"></span>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" th:href="@{/logout}" th:text="#{lbl.logout}"></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
